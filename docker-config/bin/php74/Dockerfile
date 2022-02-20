@@ -43,7 +43,7 @@ RUN pecl install redis-5.1.1 && \
     docker-php-ext-enable redis
 
 # Other PHP7 Extensions
-
+RUN docker-php-ext-install pdo && \
 RUN docker-php-ext-install pdo_mysql && \
     docker-php-ext-install pdo_sqlite && \
     docker-php-ext-install mysqli && \
@@ -54,6 +54,17 @@ RUN docker-php-ext-install pdo_mysql && \
     docker-php-ext-install -j$(nproc) intl && \
     docker-php-ext-install mbstring && \
     docker-php-ext-install gettext
+
+RUN docker-php-ext-install sockets
+RUN docker-php-ext-enable sockets
+RUN docker-php-ext-install sodium
+
+RUN docker-php-ext-install bcmath
+RUN docker-php-ext-install ctype
+RUN docker-php-ext-install fileinfo
+
+# RUN pecl install mongodb && docker-php-ext-enable mongodb
+# RUN echo "extension=mongodb.so" >> /usr/local/etc/php/php.ini
 
 # Install Freetype 
 RUN apt-get -y update && \
